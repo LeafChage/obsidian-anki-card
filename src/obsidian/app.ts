@@ -1,6 +1,7 @@
 import type { OfferableSetting } from "@/main";
 import type { App, TFile } from "obsidian";
 import { File } from "./x";
+import { XArray } from "@/x";
 
 export interface IObsidianRepository {
   findAllFiles: () => TFile[],
@@ -32,10 +33,10 @@ export class ObsidianRepository implements IObsidianRepository {
     if (column === undefined) {
       return [];
     }
-    return this.findAllFiles().filter((file) => {
+    return XArray.shuffle(this.findAllFiles().filter((file) => {
       const cache = this.app.metadataCache.getFileCache(file);
       return cache?.frontmatter?.[column] === false;
-    })
+    }))
   }
 
   private checkColumn = async (
