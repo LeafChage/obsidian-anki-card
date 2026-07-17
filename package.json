@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch build.ts",
+    "dev:web": "bun --hot ./src/index.html",
     "build": "bun run build:ts && bun run build:css",
     "build:release": "NODE_ENV=development bun run build && bun run package",
     "build:ts": "bun run ./build.ts",

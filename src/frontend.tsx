@@ -10,13 +10,16 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./App";
 import { RepositoryContext, UIAPIContext } from "./obsidian/context";
+import { LocalRepository } from "./local/local-repository";
+import { LocalUI } from "./local/local-ui";
 
 const elem = document.getElementById("root")!;
 const app = (
     <StrictMode>
-        {/* create context in the same as the obsidian plugin (view.tsx) */}
-        <RepositoryContext value={undefined}>
-            <UIAPIContext value={undefined}>
+        {/* create context in the same shape as the obsidian plugin (view.tsx),
+            backed by in-memory fixtures instead of a real vault */}
+        <RepositoryContext value={new LocalRepository()}>
+            <UIAPIContext value={new LocalUI()}>
                 <App />
             </UIAPIContext>
         </RepositoryContext>
