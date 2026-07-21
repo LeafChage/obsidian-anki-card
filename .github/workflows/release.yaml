@@ -1,15 +1,19 @@
 name: Release
 
-on:
-  workflow_dispatch:
-
 permissions:
   contents: write
 
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*"
+
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
-    name: build-release
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repos
         uses: actions/checkout@v4
@@ -30,12 +34,22 @@ jobs:
           bun install
           bun run build:release
 
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-            repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: swipe-card.zip
-            asset_name: swipe-card.${{ steps.get-version.outputs.version }}.zip
-            tag: ${{ steps.get-version.outputs.version }}
-            overwrite: true
+      # - name: Upload binaries to release
+      #   uses: svenstaro/upload-release-action@v2
+      #   with:
+      #       repo_token: ${{ secrets.GITHUB_TOKEN }}
+      #       file: swipe-card.zip
+      #       asset_name: swipe-card.${{ steps.get-version.outputs.version }}.zip
+      #       tag: ${{ steps.get-version.outputs.version }}
+      #       overwrite: false
 
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="${GITHUB_REF#refs/tags/}"
+
+          gh release create "$tag" \
+            --title="$tag" \
+            --draft \
+            dist/main.js dist/manifest.json dist/styles.css
