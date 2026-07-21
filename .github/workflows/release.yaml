@@ -21,27 +21,10 @@ jobs:
       - name: Bun setup
         uses: oven-sh/setup-bun@v2
 
-      - name: jq setup
-        uses: sergeysova/jq-action@v2
-
-      - name: get version
-        id: get-version
-        run: |
-          echo "version=$(cat manifest.json | jq -r .version)" >> $GITHUB_OUTPUT
-
       - name: Build
         run: |
           bun install
           bun run build:release
-
-      # - name: Upload binaries to release
-      #   uses: svenstaro/upload-release-action@v2
-      #   with:
-      #       repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #       file: swipe-card.zip
-      #       asset_name: swipe-card.${{ steps.get-version.outputs.version }}.zip
-      #       tag: ${{ steps.get-version.outputs.version }}
-      #       overwrite: false
 
       - name: Create release
         env:
