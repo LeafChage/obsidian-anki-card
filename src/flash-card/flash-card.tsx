@@ -57,7 +57,7 @@ export const FlashCard: FC<FlashCardProps> = ({ front, answer, onRate }) => {
 
     return (
         <div
-            className="flex h-[560px] w-full flex-col overflow-hidden rounded-[28px] bg-white shadow-2xl"
+            className="flex h-full w-full flex-col overflow-hidden rounded-[28px] bg-white shadow-2xl"
             style={getSwipeStyle(flyDirection)}
         >
             <FlashCardBody front={front} answer={answer} isFlipped={isFlipped} />

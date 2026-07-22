@@ -12,7 +12,7 @@ export const FlashCardComponent: FC = () => {
 
     if (error) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-indigo-50">
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-50 to-indigo-50">
                 <div className="rounded-3xl bg-white p-8 text-center shadow-xl">
                     <h2 className="mb-2 text-2xl font-bold text-rose-600">Error</h2>
                     <p className="text-slate-500">{error}</p>
@@ -23,7 +23,7 @@ export const FlashCardComponent: FC = () => {
 
     if (isLoading) {
         return (
-            <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-indigo-50">
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-50 to-indigo-50">
                 <div className="rounded-3xl bg-white p-8 text-center shadow-xl">
                     <p className="text-slate-500">Loading cards...</p>
                 </div>
