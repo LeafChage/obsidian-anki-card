@@ -26,7 +26,7 @@ export class SwipeWordsView extends ItemView {
     }
 
     public override onOpen = async () => {
-        const rootEl = this.containerEl.createDiv({ cls: "swipe-word-root" })
+        const rootEl = this.contentEl.createDiv({ cls: "swipe-word-root" })
         this.root = createRoot(rootEl);
         this.root.render(
             <StrictMode>

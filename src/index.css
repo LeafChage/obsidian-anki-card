@@ -3,3 +3,11 @@
    specificity, since unlayered author CSS always outranks layered CSS. */
 @import "tailwindcss" important;
 
+/* Fill the Obsidian view pane so the card centers within the actual visible
+   area (the pane content height), not the full 100vh viewport — otherwise on
+   mobile the pane header/toolbars push the vertically-centered card down and
+   out of view. The height chain is .view-content → .swipe-word-root → .app. */
+.swipe-word-root {
+  height: 100%;
+}
+

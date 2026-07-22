@@ -10,17 +10,17 @@ type FlashCardStackProps = {
 
 export const FlashCardStack: FC<FlashCardStackProps> = ({ cards, onAction }) => {
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-indigo-50 p-6">
+        <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-50 to-indigo-50 p-4">
             {
                 cards.length === 0 ?
                     <FlashCardEmpty /> :
-                    <div className="relative h-[560px] w-full max-w-[420px]">
+                    <div className="relative h-full max-h-[560px] w-full max-w-[420px]">
                         {cards.slice(0, 3).map((card, index) => {
                             const isTop = index === 0;
                             return (
                                 <div
                                     key={card.id}
-                                    className="absolute left-0 top-0 h-[560px] w-full transition-all duration-300 ease-out"
+                                    className="absolute left-0 top-0 h-full w-full transition-all duration-300 ease-out"
                                     style={{
                                         zIndex: cards.length - index,
                                         transform: `translate(${index * 10}px, ${index * 22}px) scale(${1 - index * 0.045})`,
